@@ -23,6 +23,6 @@ const server = http.createServer((req, res) => {
 });
 
 //assign the port number
-server.listen(8080, () => {
-  console.log("server listening the port number 8080");
+server.listen(4545, () => {
+  console.log("server listening the port number 4545");
 });
