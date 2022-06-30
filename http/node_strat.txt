@@ -12,6 +12,7 @@ Introduction
 
         1) JavaScript
 
+
         2) TypeScript
     
     - JavaScript is the Scripting Language and won't supports OOPS.
