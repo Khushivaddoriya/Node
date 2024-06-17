@@ -1,0 +1,87 @@
+
+import multer from 'multer';
+import fs from 'fs';
+import path from 'path';
+
+interface FileInterceptorOptions {
+    destinationFolder: string;
+}
+
+const createFileInterceptor = (options: FileInterceptorOptions) => {
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            const uploadFolder = path.resolve(__dirname, `../../src/public/images/${options.destinationFolder}`);
+            if (!fs.existsSync(uploadFolder)) {
+                fs.mkdirSync(uploadFolder, { recursive: true });
+            }
+            cb(null, uploadFolder);
+        },
+        filename: (req, file, cb) => {
+            const finalName = Date.now() + path.extname(file.originalname);
+            cb(null, finalName);
+        },
+    });
+
+    return multer({ storage }).single('file');
+};
+
+export const ProfileImageFileInterceptor = createFileInterceptor({
+    destinationFolder: 'profile_image',
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
+
+const createFileInterceptor = (options) => {
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            const uploadFolder = path.resolve(__dirname, `../../src/public/images/${options.destinationFolder}`);
+            if (!fs.existsSync(uploadFolder)) {
+                fs.mkdirSync(uploadFolder, { recursive: true });
+            }
+            cb(null, uploadFolder);
+        },
+        filename: (req, file, cb) => {
+            const finalName = Date.now() + path.extname(file.originalname);
+            cb(null, finalName);
+        },
+    });
+
+    return multer({ storage }).single('file');
+};
+
+const ProfileImageFileInterceptor = createFileInterceptor({
+    destinationFolder: 'profile_image',
+});
+
+module.exports = {
+    ProfileImageFileInterceptor
+};
